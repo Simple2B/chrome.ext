@@ -1,27 +1,11 @@
-// chrome.tabs.executeScript({
-//     file: 'parser.js'
-// }, (results) => {
-//     console.log('Popup script:')
-//     console.log(results);
-// });
-
-// chrome.runtime.onMessage.addListener(
-//     function (request, sender, sendResponse) {
-//         console.log(sender.tab ?
-//             "from a content script:" + sender.tab.url :
-//             "from the extension");
-//         if (request.greeting == "hello")
-//             sendResponse({
-//                 farewell: "goodbye"
-//             });
-//     });
-
-
-chrome.runtime.onMessage.addListener(
-    function (message, callback) {
-        if (message == 'runContentScript') {
-            chrome.tabs.executeScript({
-                file: 'parser.js'
-            });
-        }
-    });
+chrome.extension.onMessage.addListener(function (message, sender, sendResponse) {
+    switch (message.type) {
+        case "get-chart":
+            if (typeof Highcharts !== 'undefined') {
+                alert('Highcharts found!!!');
+            } else {
+                alert('Highcharts not found');
+            }
+            break;
+    }
+});
