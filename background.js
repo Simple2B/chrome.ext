@@ -4,27 +4,21 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
   switch(request.type) {
       case "get-chart":
           colorDivs();
+      // case "hello":
+      //   console.dir(request.data);
       break;
   }
   return true;
 });
-
-// // listening for an event / long-lived connections
-// // coming from devtools
-// chrome.extension.onConnect.addListener(function (port) {
-//   port.onMessage.addListener(function (message) {
-//        switch(port.name) {
-//     case "color-divs-port":
-//       colorDivs();
-//     break;
-//   }
-//   });
-// });
-
 // send a message to the content script
-var colorDivs = function() {
+let colorDivs = function() {
 chrome.tabs.getSelected(null, function(tab){
     chrome.tabs.sendMessage(tab.id, {type: "get-chart"});
   // chrome.browserAction.setBadgeText({text: "text!"});
 });
 }
+// chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+//   chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {
+//     console.log(response.farewell);
+//   });
+// })

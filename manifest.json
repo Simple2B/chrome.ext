@@ -8,13 +8,13 @@
     ],
     "js": ["content.js"]
   }],
-  "omnibox": {
-    "keyword": "yeah"
-  },
+
   "permissions": [
     "activeTab",
-    "<all_urls>"
+    "<all_urls>",
+    "storage"
   ],
+  "web_accessible_resources": ["get_charts.js"],
   "background": {
     "scripts": ["background.js"],
     "persistent": false
@@ -35,6 +35,5 @@
     "48": "img/get_started48.png",
     "128": "img/get_started128.png"
   },
-  "devtools_page": "devtools/devtools.html",
   "manifest_version": 2
 }
