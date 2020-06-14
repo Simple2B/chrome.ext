@@ -13,7 +13,13 @@ function displayData() {
         Object.keys(chartData).forEach(function (k) {
           console.log(k + ' - ' + chartData[k]);
           let li = document.createElement('li');
-          li.innerHTML = `<a href="#">${k}</a>`;
+          let a = document.createElement('a');
+          a.innerHTML = `${k}`;
+          let data = new Blob([JSON.stringify(chartData[k])], {type: 'text/plain'});
+          let url = window.URL.createObjectURL(data);
+          a.href = url;
+          a.download=`${k}.json`;
+          li.appendChild(a);
           ul.appendChild(li);
         });
       }
