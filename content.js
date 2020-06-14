@@ -1,18 +1,23 @@
-function injectScript(file, node) {
-    var th = document.getElementsByTagName(node)[0];
-    var s = document.createElement('script');
-    s.setAttribute('type', 'text/javascript');
-    s.setAttribute('src', file);
-    th.appendChild(s);
+'use strict'
+
+console.log('content!');
+
+function injectScript(file) {
+    let body = document.querySelector('body');
+    let script = document.createElement('script');
+    script.setAttribute('type', 'text/javascript');
+    script.setAttribute('src', file);
+    body.appendChild(script);
 }
 
+injectScript(chrome.extension.getURL('get_charts.js'), 'body');
+
+
 chrome.extension.onMessage.addListener(function (message, sender, sendResponse) {
+    alert('msg in content');
     switch (message.type) {
-        case "get-chart":
-            injectScript(chrome.extension.getURL('get_charts.js'), 'body');
+        case "data":
+            alert('data!');
         break;
     }
-    console.log(document.getElementById('my_high_chart').innerHTML);
-alert()
-
 });
