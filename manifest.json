@@ -23,6 +23,11 @@
     "matches": [
       "*://*.highcharts.com/*",
       "*://*.ahrefs.com/*"
+    ],
+    "ids": [
+      "*"
+      // Alternatively, to match all extensions and apps, specify only
+      // "*".
     ]
   },
   "browser_action": {

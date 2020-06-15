@@ -15,7 +15,7 @@ function displayData() {
           let li = document.createElement('li');
           let a = document.createElement('a');
           a.innerHTML = `${k}`;
-          let data = new Blob([JSON.stringify(chartData[k])], {type: 'text/plain'});
+          let data = new Blob([JSON.stringify(chartData[k])], {type: 'text/json'});
           let url = window.URL.createObjectURL(data);
           a.href = url;
           a.download=`${k}.json`;
