@@ -11,10 +11,8 @@
 
   "permissions": [
     "activeTab",
-    "<all_urls>",
-    "storage"
+    "<all_urls>"
   ],
-  "web_accessible_resources": ["get_charts.js"],
   "background": {
     "scripts": ["background.js"],
     "persistent": false

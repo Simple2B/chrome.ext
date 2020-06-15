@@ -59,6 +59,21 @@ function makeCSV(charts, delimiter = ', ') {
   return retVal;
 }
 
+function download(filename, chart) {
+  let a = document.createElement('a');
+
+  let data = new Blob([makeCSV(chart)], {
+    type: 'text/csv'
+  });
+  let url = window.URL.createObjectURL(data);
+  a.href = url;
+  a.download = filename;
+  a.style.display = 'none';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
 function displayData() {
   chrome.runtime.sendMessage({
       type: "get-data"
@@ -66,18 +81,23 @@ function displayData() {
     function (response) {
       let chartData = response.data;
       if (chartData) {
-        chartData = JSON.parse(chartData);
+        // chartData = JSON.parse(chartData);
         let ul = document.getElementById('charts');
-        ul.innerHTML = "";  // remove children
+        ul.innerHTML = `<p>Total: ${Object.keys(chartData).length}</p>`; // remove children
         Object.keys(chartData).forEach(function (k) {
           console.log(k + ' - ' + chartData[k]);
           let li = document.createElement('li');
           let a = document.createElement('a');
           a.innerHTML = `${k}`;
-          let data = new Blob([makeCSV(chartData[k])], {type: 'text/csv'});
-          let url = window.URL.createObjectURL(data);
-          a.href = url;
-          a.download=`${k}.csv`;
+          // let data = new Blob([makeCSV(chartData[k])], {type: 'text/csv'});
+          // let url = window.URL.createObjectURL(data);
+          // a.href = url;
+          a.href = '';
+          a.addEventListener("click", function () {
+            console.log('download chart: ' + k);
+            download(`${k}.csv`, chartData[k]);
+          }, false);
+          // a.download=`${k}.csv`;
           li.appendChild(a);
           ul.appendChild(li);
         });

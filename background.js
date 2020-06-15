@@ -1,6 +1,6 @@
 'use strict'
 
-let chartData = null;
+let chartData = {};
 chrome.runtime.onMessageExternal.addListener(function(request, sender, sendResponse) {
   switch(request.type) {
       case "data":
