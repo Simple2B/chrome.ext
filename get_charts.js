@@ -21,7 +21,7 @@ if (typeof Highcharts !== 'undefined') {
     });
     data = JSON.stringify(high_chart)
     chrome.runtime.sendMessage('cmmbomdfpmdlpackemapjmhpjopnbhdf', {type: 'data', data: data});
-    console.log(data);
+    // console.log(data);
     } else {
     console.log('Highcharts not found');
 }
